@@ -28,7 +28,7 @@ def import_data_from_excel(excel_file_path, table_name, create_table_query):
     print(f'Data imported successfully into {table_name}')
 
 # 1. Import Items data
-items_excel_path = '/Users/rebeccamonson/Library/CloudStorage/OneDrive-Personal/Documents/University of Arkansas/Fall 2024 Semester 4/Advanced Data Management ISYS 57103/ItemsTable.xlsx'
+items_excel_path = 'C:/Users/alyso/Downloads/Items.xlsx'
 items_create_table = '''
 CREATE TABLE IF NOT EXISTS "Items_data" (
     "Token" VARCHAR,
@@ -95,3 +95,56 @@ CREATE TABLE IF NOT EXISTS "customers_data" (
 );
 '''
 import_data_from_excel(customers_excel_path, 'customers_data', customers_create_table)
+
+#importdata2.py
+import sqlite3
+import pandas as pd 
+excel_file_path = 'C:/Users/alyso/Downloads/Items.xlsx'
+df= pd.read_excel(excel_file_path)
+
+print(df.columns)
+
+db_file = 'paperhearts.db'
+conn = sqlite3.connect(db_file)
+cursor = conn.cursor()
+
+create_table = '''
+CREATE TABLE IF NOT EXISTS "Items_data" (
+    "Token" VARCHAR
+    "Category" TEXT
+    "Price Point" TEXT
+    "SKU VARCHAR"
+    "Gross Sales" INT
+)'''
+
+cursor.execute(create_table)
+
+df.to_sql('Items_data', conn, if_exists= 'replace', index=False)
+conn.commit()
+conn.close()
+
+print("heck yes it worked!")
+
+excel_file_path = 'C:/Users/alyso/Downloads/Deposits.xlsx'
+df= pd.read_excel(excel_file_path)
+
+print(df.columns)
+
+db_file = 'paperhearts.db'
+conn = sqlite3.connect(db_file)
+cursor = conn.cursor()
+
+create_table = '''
+CREATE TABLE IF NOT EXISTS "DepositData_data" (
+    "Deposit ID" ID
+    "Deposit Date" DATE
+    "Deposit Details" VARCHAR
+)'''
+
+cursor.execute(create_table)
+
+df.to_sql('DepositData_data', conn, if_exists= 'replace', index=False)
+conn.commit()
+conn.close()
+
+print("heck yes it worked!")
