@@ -39,3 +39,37 @@ conn.commit()
 conn.close()
 
 print('Data imported successfully')
+
+excel_file_path = 'C:/Users/alyso/Downloads/Payments.xlsx'
+df = pd.read_excel(excel_file_path)
+
+print(df.columns)
+
+db_file = 'paperhearts.db'
+conn = sqlite3.connect(db_file)
+cursor = conn.cursor()
+
+create_table = '''
+CREATE TABLE IF NOT EXISTS "payments_data" (
+    "Card Entry Methods"    TEXT
+    Cash INT
+    "Square Gift Card"  INT
+    "Other Tender"  INT
+    "Other Tender Type" TEXT
+    "Other Tender Note" TEXT
+    Fees    INT
+    "Fee Percentage Rate"   INT
+    "Fee Fixed Rate"    INT
+    "Cash App"  INT
+    "Refund Reason" TEXT
+    "Discount Name" TEXT
+    "Event Type"  TEXT
+    )
+'''
+cursor.execute(create_table)
+
+df.to_sql('payments_data', conn, if_exists='replace', index=False)
+conn.commit()
+conn.close()
+
+print('Data imported successfully')
