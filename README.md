@@ -1,6 +1,7 @@
 Paper Hearts Recommendation Database
 
 Overview
+
 The Paper Hearts Recommendation Database is a personalized book recommendation system designed for customers of Paper Hearts Bookstore. The application allows users to input their reading preferences and receive immediate book recommendations based on their preferences. The system also tracks customer input for future recommendations, enhancing the personalized experience over time.
 
 Features
