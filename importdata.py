@@ -73,3 +73,26 @@ conn.commit()
 conn.close()
 
 print('Data imported successfully')
+
+excel_file_path = 'C:/Users/alyso/Downloads/Customers.xlsx'
+df = pd.read_excel(excel_file_path)
+
+print(df.columns)
+
+db_file = 'paperhearts.db'
+conn = sqlite3.connect(db_file)
+cursor = conn.cursor()
+
+create_table = '''
+CREATE TABLE IF NOT EXISTS "customers_data" (
+    "Customer ID" ID
+    "Customer Name" TEXT
+    )
+'''
+cursor.execute(create_table)
+
+df.to_sql('customers_data', conn, if_exists='replace', index=False)
+conn.commit()
+conn.close()
+
+print('Data imported successfully')
