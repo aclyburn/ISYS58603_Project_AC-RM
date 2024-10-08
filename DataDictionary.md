@@ -46,7 +46,7 @@
 | `Token`       | Unique Item Identifier             |
 | `Category`    | Type of Item         |
 | `Item`           | Item Name           |
-| `Price Point`  | Pricing Type |
+| `Price Point Name`  | Pricing Type |
 | `SKU`  | Optional Item Identifier |
 | `Gross Sales`  | Standard Price |
 
